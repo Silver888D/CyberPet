@@ -6,4 +6,6 @@ class Animal {constructor(name)
     eats() {this.health += 5;this.hunger += 10; this.morale +=2;console.log(`${this.name}'s health is ${this.health}`);return this;}
 
     stats() {return console.table({name: this.name, health: this.health, });}
-}
+};
+
+module.exports = { Animal };
