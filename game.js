@@ -18,6 +18,42 @@ async function start(){const {typeOfPet} = await inquirer.prompt
     if(typeOfPet === 'dog')myPet = new Dog(petName);
     else if (typeOfPet === 'cat')myPet = new Cat(petName);
     else if(typeOfPet === 'rabbit')myPet = new Rabbit(petName);
+    if (typeOfPet === 'dog') console.log(`
+     ^..^       /
+     /_/\\_____/
+        /\\   /\\
+       /  \\ /  \\
+    `); 
+    if (typeOfPet === 'cat') console.log(`   
+     \\   /\\
+     )  ( ')
+     (  /  )
+      \\(__)|`);
+
+    if (typeOfPet === 'rabbit') console.log(`
+      ^
+     / \\
+    / _ \\
+   | / \\ |
+   ||   || _______
+   ||   || |\\     \\
+   ||   || ||\\     \\
+   ||   || || \\    |
+   ||   || ||  \\__/
+   ||   || ||   ||
+    \\\\_/ \\_/ \\_//
+   /   _     _   \\
+  /               \\
+  |    O     O    |
+  |   \\  ___  /   |                           
+ /     \\ \\_/ /     \\
+/  -----  |  --\\    \\
+|     \\__/|\\__/ \\   |
+\\       |_|_|       /
+ \\_____       _____/
+       \\     /
+       |     | 
+    `); 
 
     userChoice();}
 
@@ -32,15 +68,23 @@ async function userChoice(){const {choices} = await inquirer.prompt
     {key:'s', name:'Stats', value:'stats'},
     {key:'q', name:'Quit', value:'quit'}
     ],});
-
-    if (choices === 'feed') await myPet.feed();
+    
+    if (choices === 'feed') await myPet.feed(), console.log(`
+           
+            ███████╗░█████╗░████████╗
+            ██╔════╝██╔══██╗╚══██╔══╝
+            █████╗░░███████║░░░██║░░░
+            ██╔══╝░░██╔══██║░░░██║░░░
+            ███████╗██║░░██║░░░██║░░░
+            ╚══════╝╚═╝░░╚═╝░░░╚═╝░░░            
+             `);
     if (choices === 'fetch') await myPet.fetch();
     if (choices === 'mouseOnString') await myPet.mouseOnString();
     if (choices === 'obstacleCourse') await myPet.obstacleCourse();
     if (choices === 'play') await myPet.play();
     if (choices === 'stats') await myPet.stats();
     if (choices === 'quit') { const quitChoice = await confirmQuit(); if (quitChoice) return;}
-
+                        
     myPet.healthDrain();
     userChoice();
 }
