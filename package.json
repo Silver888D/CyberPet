@@ -1,5 +1,23 @@
 {
   "dependencies": {
-    "inquirer": "^9.0.0"
-  }
+    "inquirer": "^8.2.4"
+  },
+  "name": "cyberpet",
+  "version": "1.0.0",
+  "main": "animal.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Silver888D/CyberPet.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Silver888D/CyberPet/issues"
+  },
+  "homepage": "https://github.com/Silver888D/CyberPet#readme",
+  "description": ""
 }
