@@ -1,4 +1,4 @@
-const { Animal } = require('./animal.js');
+const { Animal, petDied } = require('./animal.js');
 
 class Dog extends Animal{constructor(name){super(name);}
     fetch()
@@ -11,8 +11,8 @@ class Dog extends Animal{constructor(name){super(name);}
   /    (_____/         
  /_____/    U`)
     ; return this};
-    
-    healthDrain() {setInterval(()=>{this.health -=0.25},1000); return this;}
+    petDeath(){if (this.health <=0){petDied()}}
+    healthDrain() {setInterval(()=>{this.health -=10},1000); return this;}
     // Error Handling - wrong option selected points are reduced 
     mouseOnString()
     {this.morale -=20;this.hunger -= 20; this.health -=10; console.log(`${this.name} looks at you confused ${this.morale}`);}

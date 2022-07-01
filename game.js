@@ -9,21 +9,24 @@ const { Rabbit } = require('./rabbit.js');
 let myPet;
 
 // Start Function 
-async function start(){const {typeOfPet} = await inquirer.prompt
-    ({type:'list', name: 'typeOfPet', message: 'Please select your Pet ¬', 
-    choices:[{key:'d', name:'Dog', value:'dog'},{key:'c', name:'Cat', value: 'cat'},{key:'r', name:'Rabbit', value:'rabbit'},],});
-    
-    const {petName} = await inquirer.prompt({type:'input', name: 'petName', message:'Please name your CyberPet >>'});
+async function start() {
+    const { typeOfPet } = await inquirer.prompt
+        ({
+            type: 'list', name: 'typeOfPet', message: 'Please select your Pet ¬',
+            choices: [{ key: 'd', name: 'Dog', value: 'dog' }, { key: 'c', name: 'Cat', value: 'cat' }, { key: 'r', name: 'Rabbit', value: 'rabbit' },],
+        });
 
-    if(typeOfPet === 'dog')myPet = new Dog(petName);
-    else if (typeOfPet === 'cat')myPet = new Cat(petName);
-    else if(typeOfPet === 'rabbit')myPet = new Rabbit(petName);
+    const { petName } = await inquirer.prompt({ type: 'input', name: 'petName', message: 'Please name your CyberPet >>' });
+
+    if (typeOfPet === 'dog') myPet = new Dog(petName);
+    else if (typeOfPet === 'cat') myPet = new Cat(petName);
+    else if (typeOfPet === 'rabbit') myPet = new Rabbit(petName);
     if (typeOfPet === 'dog') console.log(`
      ^..^      /
      /_/\\_____/
         /\\   /\\
        /  \\ /  \\
-    `); 
+    `);
     if (typeOfPet === 'cat') console.log(`   
      \\   /\\
      )  ( ')
@@ -53,22 +56,26 @@ async function start(){const {typeOfPet} = await inquirer.prompt
  \\_____       _____/
        \\     /
        |     | 
-    `); 
+    `);
 
-    userChoice();}
+    userChoice();
+}
 
-async function userChoice(){const {choices} = await inquirer.prompt
-    ({type: 'list', name:'choices', message:'Please choose an care option for your CyberPet >>',
-    choices:[
-    {key:'f', name:'Feed', value:'feed'},
-    {key:'ft', name:'Fetch', value:'fetch'},
-    {key:'ms', name:'Mouse', value:'mouseOnString'},
-    {key:'oc', name:'Obstacle', value:'obstacleCourse'},
-    {key:'v', name:'Vet', value:'vet'},
-    {key:'s', name:'Stats', value:'stats'},
-    {key:'q', name:'Quit', value:'quit'}
-    ],});
-    if (myPet.health <=0){petDied()}
+async function userChoice() {
+    const { choices } = await inquirer.prompt
+        ({
+            type: 'list', name: 'choices', message: 'Please choose an care option for your CyberPet >>',
+            choices: [
+                { key: 'f', name: 'Feed', value: 'feed' },
+                { key: 'ft', name: 'Fetch', value: 'fetch' },
+                { key: 'ms', name: 'Mouse', value: 'mouseOnString' },
+                { key: 'oc', name: 'Obstacle', value: 'obstacleCourse' },
+                { key: 'v', name: 'Vet', value: 'vet' },
+                { key: 's', name: 'Stats', value: 'stats' },
+                { key: 'q', name: 'Quit', value: 'quit' }
+            ],
+        });
+
     if (choices === 'feed') await myPet.feed(), console.log(`
            
             ███████╗░█████╗░████████╗
@@ -83,24 +90,30 @@ async function userChoice(){const {choices} = await inquirer.prompt
     if (choices === 'obstacleCourse') await myPet.obstacleCourse();
     if (choices === 'play') await myPet.vet();
     if (choices === 'stats') await myPet.stats();
-    if (choices === 'quit') { const quitChoice = await confirmQuit(); if (quitChoice) return;}
-    petDied();          
+    if (choices === 'quit') { const quitChoice = await confirmQuit(); if (quitChoice) return; }
+    myPet.petDeath();
     myPet.healthDrain();
     userChoice();
 }
 
-async function confirmQuit(){const {quitChoice} = await inquirer.prompt
-    ({type:'list', name: 'quitChoice', message: 'Are you sure you want to quit? >>', 
-    choices:[{key:'y', name:'Yes', value:'yes'},{key:'n', name:'No', value: 'no'}]});
+async function confirmQuit() {
+    const { quitChoice } = await inquirer.prompt
+        ({
+            type: 'list', name: 'quitChoice', message: 'Are you sure you want to quit? >>',
+            choices: [{ key: 'y', name: 'Yes', value: 'yes' }, { key: 'n', name: 'No', value: 'no' }]
+        });
     if (quitChoice === 'yes') await start();
-    else if (quitChoice === 'no')await userChoice();}
+    else if (quitChoice === 'no') await userChoice();
+}
 
-async function petDied(){if (myPet.health <=0){const {restartChoice} = await inquirer.prompt
-    ({type:'list', name: 'restartChoice', message: `Your Pet has died as it's health has reached 0, would you like to start again? >>`, 
-    choices:[{key:'y', name:'Yes', value:'yes'},{key:'n', name:'No', value: 'no'}]});
-    if (restartChoice === 'yes') await start();
-    else if (restartChoice === 'no')await userChoice();}
-    if (typeOfPet === 'dog') console.log(`
+async function petDied() {
+    if (this.health <= 0) {
+        const { restartChoice } = await inquirer.prompt
+            ({
+                type: 'list', name: 'restartChoice', message: `Your Pet has died as it's health has reached 0, would you like to start again? >>`,
+                choices: [{ key: 'y', name: 'Yes', value: 'yes' }, { key: 'n', name: 'No', value: 'no' }]
+            });
+        if (typeOfPet === 'dog') console.log(`
     
     ⠀⠀⠀⢀⣠⠤⠔⠒⠒⠒⠒⠒⠢⠤⢤⣀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⢀⠴⠊⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠲⣄⠀⠀⠀
@@ -119,7 +132,7 @@ async function petDied(){if (myPet.health <=0){const {restartChoice} = await inq
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠳⠤⠤⠼⠀⠘⠤⠴⠃⠀⠀⠀⠈⠉⠁⠀
     
     `)
-    if (typeOfPet === 'cat') console.log(`
+        if (typeOfPet === 'cat') console.log(`
 
      ___
     (___)
@@ -137,12 +150,16 @@ _________________
 (___    _____)
   '--'
    `);
-    if (typeOfPet === 'rabbit') console.log(`
+        if (typeOfPet === 'rabbit') console.log(`
     /)/)
    ( . .)
     ( づ 🔪
-    `); 
+    `);
+        if (restartChoice === 'yes') await start();
+        else if (restartChoice === 'no') await userChoice();
     }
+}
 
 
 start(); 
+module.exports = {petDied};
