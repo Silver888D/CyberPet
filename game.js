@@ -19,7 +19,7 @@ async function start(){const {typeOfPet} = await inquirer.prompt
     else if (typeOfPet === 'cat')myPet = new Cat(petName);
     else if(typeOfPet === 'rabbit')myPet = new Rabbit(petName);
     if (typeOfPet === 'dog') console.log(`
-     ^..^       /
+     ^..^      /
      /_/\\_____/
         /\\   /\\
        /  \\ /  \\
@@ -64,11 +64,11 @@ async function userChoice(){const {choices} = await inquirer.prompt
     {key:'ft', name:'Fetch', value:'fetch'},
     {key:'ms', name:'Mouse', value:'mouseOnString'},
     {key:'oc', name:'Obstacle', value:'obstacleCourse'},
-    {key:'p', name:'Play', value:'play'},
+    {key:'v', name:'Vet', value:'vet'},
     {key:'s', name:'Stats', value:'stats'},
     {key:'q', name:'Quit', value:'quit'}
     ],});
-    
+    if (myPet.health <=0){petDied()}
     if (choices === 'feed') await myPet.feed(), console.log(`
            
             ███████╗░█████╗░████████╗
@@ -81,10 +81,10 @@ async function userChoice(){const {choices} = await inquirer.prompt
     if (choices === 'fetch') await myPet.fetch();
     if (choices === 'mouseOnString') await myPet.mouseOnString();
     if (choices === 'obstacleCourse') await myPet.obstacleCourse();
-    if (choices === 'play') await myPet.play();
+    if (choices === 'play') await myPet.vet();
     if (choices === 'stats') await myPet.stats();
     if (choices === 'quit') { const quitChoice = await confirmQuit(); if (quitChoice) return;}
-                        
+    petDied();          
     myPet.healthDrain();
     userChoice();
 }
@@ -94,5 +94,55 @@ async function confirmQuit(){const {quitChoice} = await inquirer.prompt
     choices:[{key:'y', name:'Yes', value:'yes'},{key:'n', name:'No', value: 'no'}]});
     if (quitChoice === 'yes') await start();
     else if (quitChoice === 'no')await userChoice();}
+
+async function petDied(){if (myPet.health <=0){const {restartChoice} = await inquirer.prompt
+    ({type:'list', name: 'restartChoice', message: `Your Pet has died as it's health has reached 0, would you like to start again? >>`, 
+    choices:[{key:'y', name:'Yes', value:'yes'},{key:'n', name:'No', value: 'no'}]});
+    if (restartChoice === 'yes') await start();
+    else if (restartChoice === 'no')await userChoice();}
+    if (typeOfPet === 'dog') console.log(`
+    
+    ⠀⠀⠀⢀⣠⠤⠔⠒⠒⠒⠒⠒⠢⠤⢤⣀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⢀⠴⠊⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠲⣄⠀⠀⠀
+⠀⠀⡰⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⢧⠀⠀
+⠀⡸⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢇⠀
+⠀⡇⠀⠀⠀⢀⡶⠛⣿⣷⡄⠀⠀⠀⣰⣿⠛⢿⣷⡄⠀⠀⠀⢸⠀
+⠀⡇⠀⠀⠀⢸⣷⣶⣿⣿⡇⠀⠀⠀⢻⣿⣶⣿⣿⣿⠀⠀⠀⢸⠀
+⠀⡇⠀⠀⠀⠈⠛⠻⠿⠟⠁⠀⠀⠀⠈⠛⠻⠿⠛⠁⠀⠀⠀⢸⠀
+⠀⠹⣄⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⣀⠀⠀⠀⠀⠀⠀⠀⠀⣠⠏⠀
+⠀⠀⠈⠢⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣤⣚⡁⠀⠀
+⠀⠀⠀⠀⠈⠙⠒⢢⡤⠤⠤⠤⠤⠤⠖⠒⠒⠋⠉⠉⠀⠀⠉⠉⢦
+⠀⠀⠀⠀⠀⠀⠀⢸⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸
+⠀⠀⠀⠀⠀⠀⠀⢸⡀⠀⠀⠀⠀⣤⠀⠀⠀⢀⣀⣀⣀⠀⠀⠀⢸
+⠀⠀⠀⠀⠀⠀⠀⠈⡇⠀⠀⠀⢠⣿⠀⠀⠀⢸⠀⠀⣿⠀⠀⠀⣸
+⠀⠀⠀⠀⠀⠀⠀⠀⢱⠀⠀⠀⢸⠘⡆⠀⠀⢸⣀⡰⠋⣆⠀⣠⠇
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠳⠤⠤⠼⠀⠘⠤⠴⠃⠀⠀⠀⠈⠉⠁⠀
+    
+    `)
+    if (typeOfPet === 'cat') console.log(`
+
+     ___
+    (___)
+____
+_\\___ \\  |\\_/|
+\\     \\ \\/ , , \\ ___
+\\__   \\ \\ ="= //|||\\
+|===  \\/____)_)||||
+\\______|    | |||||
+_/_|  | | =====
+(_/  \\_)_) snd
+_________________
+(                _)
+(__   '          )
+(___    _____)
+  '--'
+   `);
+    if (typeOfPet === 'rabbit') console.log(`
+    /)/)
+   ( . .)
+    ( づ 🔪
+    `); 
+    }
+
 
 start(); 

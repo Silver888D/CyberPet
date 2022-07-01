@@ -10,7 +10,9 @@ class Cat extends Animal{constructor(name){super(name);}
  (@)<_____>__(_____)____/`)
   
     ; return this}; 
-    healthDrain() {setInterval(()=>{this.health -=1},1000); return this;}
+    
+    healthDrain() {setInterval(()=>{this.health -=0.5},1000); return this;}
+
     };
 
 module.exports = {Cat};

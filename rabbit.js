@@ -10,7 +10,8 @@ class Rabbit extends Animal{constructor(name){super(name);}
         (puff puff)
     `)
     ; return this}; 
-    healthDrain() {setInterval(()=>{this.health -=1},1000); return this;}
+    
+    healthDrain() {setInterval(()=>{this.health -=10},1000); return this;}
     };
 
 module.exports = {Rabbit};
