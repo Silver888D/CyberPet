@@ -1,4 +1,3 @@
-const inquirer = require('inquirer');
 const { Animal } = require('./animal.js');
 
 async function petDied() {console.log(`
@@ -19,15 +18,8 @@ async function petDied() {console.log(`
 ⠀⠀⠀⠀⠀⠀⠀⠀⢱⠀⠀⠀⢸⠘⡆⠀⠀⢸⣀⡰⠋⣆⠀⣠⠇
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠳⠤⠤⠼⠀⠘⠤⠴⠃⠀⠀⠀⠈⠉⠁⠀
     
-    `)
-    const {restartChoice} =  inquirer.prompt
-            ({
-                type: 'list', name: 'restartChoice', message: `Your Pet has died as it's health has reached 0, would you like to start again? >>`,
-                choices: [{ key: 'y', name: 'Yes', value: 'yes' }, { key: 'n', name: 'No', value: 'no' }]
-            });
+Your Pet has died as it's health has reached 0. GAME OVER! Run the file to try again.`);}
     
-    if (restartChoice === 'yes') {  start() };
-    if (restartChoice === 'no') {  confirmQuit()};};
 
 
 
