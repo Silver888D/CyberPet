@@ -82,7 +82,6 @@ async function userChoice() {
       { key: "ft", name: "Fetch", value: "fetch" },
       { key: "ms", name: "Mouse", value: "mouseOnString" },
       { key: "oc", name: "Obstacle", value: "obstacleCourse" },
-      { key: "v", name: "Vet", value: "vet" },
       { key: "s", name: "Stats", value: "stats" },
       { key: "q", name: "Quit", value: "quit" },
     ],
@@ -92,12 +91,7 @@ async function userChoice() {
     await myPet.feed(),
       console.log(`
            
-            ███████╗░█████╗░████████╗
-            ██╔════╝██╔══██╗╚══██╔══╝
-            █████╗░░███████║░░░██║░░░
-            ██╔══╝░░██╔══██║░░░██║░░░
-            ███████╗██║░░██║░░░██║░░░
-            ╚══════╝╚═╝░░╚═╝░░░╚═╝░░░            
+      ( ^-^)_旦          
              `),
       userChoice();
   if (choices === "fetch" && myPet.health > 0)
