@@ -76,7 +76,7 @@ async function userChoice() {
             ],
         });
 
-    if (choices === 'feed') await myPet.feed(), console.log(`
+    if (choices === 'feed'&& myPet.health > 0) await myPet.feed(), console.log(`
            
             ███████╗░█████╗░████████╗
             ██╔════╝██╔══██╗╚══██╔══╝
@@ -84,16 +84,16 @@ async function userChoice() {
             ██╔══╝░░██╔══██║░░░██║░░░
             ███████╗██║░░██║░░░██║░░░
             ╚══════╝╚═╝░░╚═╝░░░╚═╝░░░            
-             `);
-    if (choices === 'fetch') await myPet.fetch();
-    if (choices === 'mouseOnString') await myPet.mouseOnString();
-    if (choices === 'obstacleCourse') await myPet.obstacleCourse();
-    if (choices === 'play') await myPet.vet();
-    if (choices === 'stats') await myPet.stats();
+             `),userChoice();
+    if (choices === 'fetch' && myPet.health > 0) await myPet.fetch(),userChoice();
+    if (choices === 'mouseOnString' && myPet.health > 0) await myPet.mouseOnString(),userChoice();
+    if (choices === 'obstacleCourse' && myPet.health > 0) await myPet.obstacleCourse(),userChoice();
+    if (choices === 'stats' && myPet.health > 0) await myPet.stats(),userChoice();
     if (choices === 'quit') { const quitChoice = await confirmQuit(); if (quitChoice) return; }
-    myPet.petDeath();
+    
     myPet.healthDrain();
-    userChoice();
+    
+    myPet.petDeath();
 }
 
 async function confirmQuit() {
@@ -106,60 +106,5 @@ async function confirmQuit() {
     else if (quitChoice === 'no') await userChoice();
 }
 
-async function petDied() {
-    if (this.health <= 0) {
-        const { restartChoice } = await inquirer.prompt
-            ({
-                type: 'list', name: 'restartChoice', message: `Your Pet has died as it's health has reached 0, would you like to start again? >>`,
-                choices: [{ key: 'y', name: 'Yes', value: 'yes' }, { key: 'n', name: 'No', value: 'no' }]
-            });
-        if (typeOfPet === 'dog') console.log(`
-    
-    ⠀⠀⠀⢀⣠⠤⠔⠒⠒⠒⠒⠒⠢⠤⢤⣀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⢀⠴⠊⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠲⣄⠀⠀⠀
-⠀⠀⡰⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⢧⠀⠀
-⠀⡸⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢇⠀
-⠀⡇⠀⠀⠀⢀⡶⠛⣿⣷⡄⠀⠀⠀⣰⣿⠛⢿⣷⡄⠀⠀⠀⢸⠀
-⠀⡇⠀⠀⠀⢸⣷⣶⣿⣿⡇⠀⠀⠀⢻⣿⣶⣿⣿⣿⠀⠀⠀⢸⠀
-⠀⡇⠀⠀⠀⠈⠛⠻⠿⠟⠁⠀⠀⠀⠈⠛⠻⠿⠛⠁⠀⠀⠀⢸⠀
-⠀⠹⣄⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⣀⠀⠀⠀⠀⠀⠀⠀⠀⣠⠏⠀
-⠀⠀⠈⠢⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣤⣚⡁⠀⠀
-⠀⠀⠀⠀⠈⠙⠒⢢⡤⠤⠤⠤⠤⠤⠖⠒⠒⠋⠉⠉⠀⠀⠉⠉⢦
-⠀⠀⠀⠀⠀⠀⠀⢸⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸
-⠀⠀⠀⠀⠀⠀⠀⢸⡀⠀⠀⠀⠀⣤⠀⠀⠀⢀⣀⣀⣀⠀⠀⠀⢸
-⠀⠀⠀⠀⠀⠀⠀⠈⡇⠀⠀⠀⢠⣿⠀⠀⠀⢸⠀⠀⣿⠀⠀⠀⣸
-⠀⠀⠀⠀⠀⠀⠀⠀⢱⠀⠀⠀⢸⠘⡆⠀⠀⢸⣀⡰⠋⣆⠀⣠⠇
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠳⠤⠤⠼⠀⠘⠤⠴⠃⠀⠀⠀⠈⠉⠁⠀
-    
-    `)
-        if (typeOfPet === 'cat') console.log(`
-
-     ___
-    (___)
-____
-_\\___ \\  |\\_/|
-\\     \\ \\/ , , \\ ___
-\\__   \\ \\ ="= //|||\\
-|===  \\/____)_)||||
-\\______|    | |||||
-_/_|  | | =====
-(_/  \\_)_) snd
-_________________
-(                _)
-(__   '          )
-(___    _____)
-  '--'
-   `);
-        if (typeOfPet === 'rabbit') console.log(`
-    /)/)
-   ( . .)
-    ( づ 🔪
-    `);
-        if (restartChoice === 'yes') await start();
-        else if (restartChoice === 'no') await userChoice();
-    }
-}
-
 
 start(); 
-module.exports = {petDied};
